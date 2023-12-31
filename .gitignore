@@ -2,4 +2,9 @@
 bin/
 build/
 prj/
-utils/
+utils/external
+
+**.sln
+**.vcxproj
+**.vcxproj.user
+**.vcxproj.filters
