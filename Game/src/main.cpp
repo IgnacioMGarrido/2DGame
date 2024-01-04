@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Windows.h>
+#include "../include/Logger.h"
 
 static HWND hwnd;
 static bool running = true;
@@ -85,8 +86,10 @@ int main(int argc, char** argv)
 
 	while (running)
 	{
+		Core::LOG_TRACE("This is a trace");
+		Core::LOG_WARNING("This is a warning");
+		Core::LOG_ERROR("This is an error");
 		UpdateWindow();
 	}
 	return 0;
 }
-
