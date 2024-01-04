@@ -1,21 +1,23 @@
-include "utils/functions.lua"
 workspace "2DGame"
-	  location "./"
-	  configurations {"Debug", "Release"}
+	  configurations {"Debug", "Release", "Dist"}
 	  architecture "x64"
 	  platforms {"x64"}
+	  startproject "Game"
 
-	  configurations
-	  {
-		"Debug",
-              	"Release",
-              	"Dist"
-	  }
+	  filter "system:windows"
+	  	 buildoptions {"/EHsc", "/Zc:preprocessor", "/Zc:__cplusplus"}
+		 
 
 	  flags
     	  {
 		"MultiProcessorCompile"
     	  }
 
-	  AddProject("Game")
+  OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
+
+  group "Core"
+ 	include "Engine/Engine.lua"
+  group ""
+
+  include "Game/Game.lua"
 	  

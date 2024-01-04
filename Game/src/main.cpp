@@ -1,6 +1,6 @@
 #include <iostream>
 #include <Windows.h>
-#include "../include/Logger.h"
+#include <Logger.h>
 
 static HWND hwnd;
 static bool running = true;
