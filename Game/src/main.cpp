@@ -86,9 +86,9 @@ int main(int argc, char** argv)
 
 	while (running)
 	{
-		Core::LOG_TRACE("This is a trace");
-		Core::LOG_WARNING("This is a warning");
-		Core::LOG_ERROR("This is an error");
+		LOG_TRACE("This is a trace");
+		LOG_WARNING("This is a warning");
+		LOG_ERROR("This is an error");
 		UpdateWindow();
 	}
 	return 0;

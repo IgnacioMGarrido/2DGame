@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <widemath.h>
 
-namespace Core
+namespace 
 {
 enum class TextColor : uint8_t
 {
@@ -24,8 +24,6 @@ enum class TextColor : uint8_t
 	TEXT_COLOR_BRIGHT_WHITE,
 	TEXT_COLOR_COUNT
 };
-namespace
-{
 template<typename ...Args>
 void _log(const char* i_prefix, const char* i_message, TextColor i_textColor, Args... args)
 {
@@ -57,11 +55,15 @@ void _log(const char* i_prefix, const char* i_message, TextColor i_textColor, Ar
 
 	puts(textBuffer);
 }
-} // namespace
+} //namespace
 
-#define LOG_TRACE(msg, ...) _log("TRACE: ", msg, Core::TextColor::TEXT_COLOR_GREEN, ##__VA_ARGS__);
-#define LOG_WARNING(msg, ...) _log("WARNING: ", msg, Core::TextColor::TEXT_COLOR_YELLOW, ##__VA_ARGS__);
-#define LOG_ERROR(msg, ...) _log("ERROR: ", msg, Core::TextColor::TEXT_COLOR_RED, ##__VA_ARGS__);
-
-} // namespace Core
+#ifdef DEBUG
+#define LOG_TRACE(msg, ...) _log("TRACE: ", msg, TextColor::TEXT_COLOR_GREEN, ##__VA_ARGS__)
+#define LOG_WARNING(msg, ...) _log("WARNING: ", msg, TextColor::TEXT_COLOR_YELLOW, ##__VA_ARGS__)
+#define LOG_ERROR(msg, ...) _log("ERROR: ", msg, TextColor::TEXT_COLOR_RED, ##__VA_ARGS__)
+#else
+#define LOG_TRACE(msg, ...) do{}while(false)
+#define LOG_WARNING(msg, ...) do{}while(false)
+#define LOG_ERROR(msg, ...) do{}while(false)
+#endif
 
