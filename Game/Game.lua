@@ -34,7 +34,7 @@
   	        defines "DEBUG"
 			runtime "Debug"
 	 		symbols "on"
-    	 	optimize "on"
+    	 	optimize "off"
 
   		filter "configurations:Release"
 	        defines "RELEASE"

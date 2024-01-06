@@ -11,6 +11,6 @@ static bool running = true;
 int main(int argc, char** argv)
 {
 	core::platform::EWindow window {{.width = 1280, .height = 720, .name = "2DGame"}};
-	window.UpdateWindow();
+	window.UpdateWindowMessages();
 	return 0;
 }
