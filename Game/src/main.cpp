@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv)
 {
-	core::platform::EWindow window {{.width = 1280, .height = 720, .name = "2DGame"}};
+	core::platform::EWindow window {1280, 720, "2DGame"};
 	window.UpdateWindowMessages();
 	return 0;
 }
