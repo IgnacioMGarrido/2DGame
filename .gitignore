@@ -2,7 +2,6 @@
 bin/
 build/
 prj/
-utils/external
 
 **.sln
 **.vcxproj
