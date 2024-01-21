@@ -9,13 +9,15 @@
   	  files
   	  {
 	  	"include/**.h",
-		"src/**.cpp"
+		"src/**.cpp",
+		"../%{extDir.Glad}/src/**",
 	  }
 
 	  includedirs
 	  {
 		"../Engine/include",
 		"../%{extDir.SDL2}/include",
+		"../%{extDir.Glad}/include",
 		"include"
 	  }
 

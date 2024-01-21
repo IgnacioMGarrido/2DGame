@@ -16,6 +16,7 @@ workspace "2DGame"
   OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
   extDir = {}
   extDir["SDL2"] = "3rdParty/SDL2"
+  extDir["Glad"] = "3rdParty/Glad"
 
   group "Core"
  	include "Engine/Engine.lua"

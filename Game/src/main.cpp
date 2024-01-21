@@ -1,8 +1,9 @@
 #include <Logger.h>
 #include <SDL.h>
+#include <glad/glad.h>
 #include <cstdlib>
 
-//TODO(Nacho): remove glovals
+//TODO(Nacho): remove globals
 
 uint16_t g_width = 1280;
 uint16_t g_heigh = 720;
@@ -12,7 +13,7 @@ bool g_running = true;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void InitProgram()
+void InitSDL()
 {
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -35,6 +36,28 @@ void InitProgram()
 	g_context = SDL_GL_CreateContext(g_window);
 
 	LOG_ASSERT(g_context, "Failed to create Opengl Context");
+
+}
+
+void InitGlad()
+{
+
+	if(!gladLoadGLLoader(SDL_GL_GetProcAddress))
+	{
+		LOG_ERROR("Couldn't Initialize Glad");
+		exit(EXIT_FAILURE);
+	}
+
+	LOG_TRACE("Vendor: %s", glGetString(GL_VENDOR));
+	LOG_TRACE("Renderer: %s", glGetString(GL_RENDERER));
+	LOG_TRACE("Version: %s", glGetString(GL_VERSION));
+	LOG_TRACE("Shading Language: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
+}
+
+void InitProgram()
+{
+	InitSDL();
+	InitGlad();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
