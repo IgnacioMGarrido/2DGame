@@ -15,12 +15,20 @@
 	  includedirs
 	  {
 		"../Engine/include",
+		"../%{extDir.SDL2}/include",
 		"include"
+	  }
+
+	  libdirs
+	  {
+		"../%{extDir.SDL2}/lib/x64",
 	  }
 
 	  links
 	  {
-		"Engine"
+		"Engine",
+		"SDL2",
+		"SDL2main"
 	  }
 
 	  targetdir ("../build/bin/" .. OutputDir .. "/%{prj.name}")
