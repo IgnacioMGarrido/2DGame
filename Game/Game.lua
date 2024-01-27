@@ -10,27 +10,18 @@
   	  {
 	  	"include/**.h",
 		"src/**.cpp",
-		"../%{extDir.Glad}/src/**",
+		--"../%{extDir.Glad}/src/**",
 	  }
 
 	  includedirs
 	  {
 		"../Engine/include",
-		"../%{extDir.SDL2}/include",
-		"../%{extDir.Glad}/include",
 		"include"
-	  }
-
-	  libdirs
-	  {
-		"../%{extDir.SDL2}/lib/x64",
 	  }
 
 	  links
 	  {
-		"Engine",
-		"SDL2",
-		"SDL2main"
+		"Engine"
 	  }
 
 	  targetdir ("../build/bin/" .. OutputDir .. "/%{prj.name}")
