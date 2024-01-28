@@ -9,7 +9,8 @@
   	  files
   	  {
 	  	"include/**.h",
-		"src/**.cpp"
+		"src/**.cpp",
+		--"../%{extDir.Glad}/src/**",
 	  }
 
 	  includedirs
