@@ -1,6 +1,6 @@
 #include <engine/platform/Logger.h>
 
-// TODO(Nacho): These Drawer thing has to go
+// TODO(Nacho): These Drawer thing has to go. Maybe just submit the renderables automatically?
 #include <engine/render/Drawer.h>
 #include <engine/EntryPoint.h>
 #include "Game.h"
@@ -11,9 +11,6 @@
 Game::Game(Core::App::AppContext i_context)
 	: Core::App(i_context)
 {
-	//1 paddle, 1 ball, 68 Blocks
-	m_blockEntities.reserve(72);
-
 	// Paddle
 	m_blockEntities.push_back({
 			.speedX = 0.f,
@@ -122,8 +119,6 @@ void Game::Update(float i_fixedTick)
 
 		}
 	}
-
-	//LOG_TRACE("MyApp::Update() -> %.1f fps", i_fixedTick);
 }
 
 ///////////////////////////////////////////////////////////////////////////
