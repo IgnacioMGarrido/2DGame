@@ -61,9 +61,10 @@ public:
 	}
 
 	std::vector<Block> m_blockEntities;
+	float m_paddleSpeed = .7f;
 
-	App(std::string i_appName = "BreakOut")
-		: Core::App(i_appName)
+	App(Core::App::AppContext i_context)
+		: Core::App(i_context)
 	{
 		//1 paddle, 1 ball, 68 Blocks
 		m_blockEntities.reserve(72);
@@ -73,15 +74,15 @@ public:
 				.speedX = 0.f,
 				.speedY = 0.f,
 				.isAlive = true,
-				//.rect = { .x = 576.f, .y = 600.f, .w = 128.f, .h = 32.f },
-				.rect = { .x = 0.f, .y = 600.f, .w = 1300.f, .h = 32.f },
+				.rect = { .x = 576.f, .y = 600.f, .w = 128.f, .h = 32.f },
+				//.rect = { .x = 0.f, .y = 600.f, .w = 1300.f, .h = 32.f },
 
 				.color = {.r = 43, .g = 0, .b = 255}});
 
 		// Ball
 		m_blockEntities.push_back({
-				.speedX = 0.02f,
-				.speedY = 0.03f,
+				.speedX = .5f,
+				.speedY = .5f,
 				.isAlive = true,
 				.rect = { .x = 632.f, .y = 580.f, .w = 16.f, .h = 16.f },
 				.color = {.r = 0, .g = 255, .b = 0}});
@@ -129,6 +130,7 @@ public:
 		Block& paddle = m_blockEntities.at(0);
 		Block& ball = m_blockEntities.at(1);
 
+		paddle.rect.x += paddle.speedX * i_fixedTick;
 
 		ball.rect.x += ball.speedX * i_fixedTick;
 		ball.rect.y += ball.speedY * i_fixedTick;
@@ -192,7 +194,64 @@ public:
 	}
 };
 
+
+void SpaceBarPressed(Core::App& myApp)
+{
+	LOG_TRACE("App::SpaceBarPressed");
+}
+
+void RightArrowPressed(Core::App& myApp)
+{
+	App* app = (App*)(&myApp);
+	if(app)
+	{
+		App::Block& paddle = app->m_blockEntities.at(0);
+		paddle.speedX = app->m_paddleSpeed;
+	}
+
+	LOG_TRACE("App::RightArrowPressed");
+}
+
+void LeftArrowPressed(Core::App& myApp)
+{
+	App* app = (App*)(&myApp);
+	if(app)
+	{
+		App::Block& paddle = app->m_blockEntities.at(0);
+		paddle.speedX = -app->m_paddleSpeed;
+	}
+
+	LOG_TRACE("App::LeftArrowPressed ");
+}
+
+void DirectionReleased(Core::App& myApp)
+{
+	App* app = (App*)(&myApp);
+	if(app)
+	{
+		App::Block& paddle = app->m_blockEntities.at(0);
+		paddle.speedX = 0;
+	}
+
+	LOG_TRACE("App::LeftArrowPressed ");
+}
+
+
 Core::App* CreateApp()
 {
-	return new App();
+	Core::App::AppContext context =
+	{ 
+			.appName = "BreakOut",
+			.winDimX = 1280,
+			.winDimY = 720,
+			.inputFNs =
+			{
+				.fSpaceBarPressed = &SpaceBarPressed,
+				.fRightArrowPressed = &RightArrowPressed,
+				.fLeftArrowPressed = &LeftArrowPressed,
+				.fLeftArrowReleased = &DirectionReleased,
+				.fRightArrowReleased = &DirectionReleased
+			}
+	};
+	return new App(context);
 }
